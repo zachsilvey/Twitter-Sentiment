@@ -20,6 +20,7 @@ handles <- c("@kevinrose", "@tferriss")
 tweetsIngest <- function(query, n) {
   raw_tweets <- searchTwitter(query, n, resultType = "recent")
   tidy_tweets <- do.call("rbind", lapply(raw_tweets, as.data.frame))
+  tidy_tweets <- cbind(tidy_tweets, query = rep(query, n))
   return(tidy_tweets)
 }
 
