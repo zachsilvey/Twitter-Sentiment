@@ -2,3 +2,4 @@ This file serves as a master checklist of things that need to be added to this p
 
 [] Update tweetIngest() to account for re-tweets. We should not be analysing re-tweets of the user we are scoring. We are aiming to score tweets that mention the queried user. Need to match tweet contents that contain "RT query:" and remove those from the dataset.
 
+[] Fix UTF-8 to ASCII conversion in the cleaning function
