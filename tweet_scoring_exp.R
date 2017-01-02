@@ -5,12 +5,10 @@ prepTweets <- function(df) {
   cleanTweets <- gsub('[[:punct:]]', '', cleanTweets)
   cleanTweets <- gsub('[[:cntrl:]]', '', cleanTweets)
   cleanTweets <- gsub('\\d+', '', cleanTweets)
-  #cleanTweets <- iconv(cleanTweets, 'UTF-8', 'ASCII') This is returning NA when there are UTF-8 characters in the string, needs to be remedied
+  cleanTweets <- iconv(enc2utf8(cleanTweets), sub = "byte")
   cleanTweets <- tolower(cleanTweets)
   df <- cbind(df, cleanText = cleanTweets)
 }
-
-cleaned_blot <- prepTweets(big_list_of_tweets)
 
 # The intention of this function is to take a single charcter vector as input and then output a numeric value
 # The function could then be used to score a vector of tweets using an apply function
@@ -37,11 +35,3 @@ scoreDF <- function(df, pos_lex, neg_lex) {
   scores <- lapply(df$cleanText, scoreTweet, pos_lex = pos_lex, neg_lex = neg_lex)
   return(cbind(df, scores = unlist(scores)))
 }
-
-good_text <- scan('positive-words.txt',
-                  what = 'character', comment.char = ';')
-bad_text <- scan('negative-words.txt',
-                 what = 'character', comment.char = ';')
-
-
-scored_blot <- scoreDF(cleaned_blot, good_text, bad_text)

@@ -11,8 +11,6 @@ source("keys.R")
 # Establish OAuth handshake with Twitter API
 setup_twitter_oauth(api_key, api_secret, access_token, access_token_secret)
 
-handles <- c("@kevinrose", "@tferriss")
-
 # Function to pull tweets using searchTwitter from the twitteR package
 # Outputs tidy data frame with each column being a tweet attribute
 # Accepts search query in form of string, n number of tweets
@@ -35,4 +33,3 @@ twitterMultiQuery <- function(querys, n) {
   return(tweets_master)
 }
 
-big_list_of_tweets <- twitterMultiQuery(handles, 100)
